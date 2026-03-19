@@ -23,7 +23,7 @@ export default function Auth() {
                 {/* Logo */}
                 <div className="logo-section">
                     <div className="logo">
-                        <img src="/src/Imgs/signInLogo.png" alt="QuantumCode Logo" className="logo-img" />
+                        <img src="/Imgs/signInLogo.png" alt="QuantumCode Logo" className="logo-img" />
                         <span className="logo-text">QuantumCode</span>
                     </div>
                 </div>
