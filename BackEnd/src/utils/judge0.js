@@ -1,6 +1,11 @@
 const axios = require("axios");
 
-const JUDGE0_API_KEY = '6b8a90d3f5msh6fc89d63908e18dp1ba12cjsn578f0281ce2e';
+// Judge0 API Key from environment - NEVER hardcode in production
+const JUDGE0_API_KEY = process.env.JUDGE0_API_KEY;
+
+if (!JUDGE0_API_KEY) {
+  console.warn('⚠️  WARNING: JUDGE0_API_KEY is not set in environment variables');
+}
 
 const getLanguageById = (lang) => {
     const language = {

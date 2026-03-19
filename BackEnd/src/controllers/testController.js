@@ -35,7 +35,7 @@ const getAllTests = async (req, res) => {
             .populate('problems', 'title difficulty category')
             .populate('createdBy', 'firstname lastname')
             .sort({ scheduledAt: 1 });
-            
+
 
         const testsWithStatus = tests.map(test => {
             const t = test.toObject();
