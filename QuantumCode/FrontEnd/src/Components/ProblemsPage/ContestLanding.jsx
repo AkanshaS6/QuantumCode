@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ContestContext } from '../../context/ContestContext';
+import '../ProblemsPage/ProblemSolver.css';
 import './Contest.css';
 
-export default function XClashGame() {
+const ContestLanding = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { initializeSocket, joinRoom } = useContext(ContestContext);
@@ -75,10 +76,10 @@ export default function XClashGame() {
 
     if (mode === 'home') {
         return (
-            <div className="contest-landing flex-1">
+            <div className="contest-landing">
                 <div className="contest-hero">
                     <div className="contests-glow"></div>
-                    <h1 className="contests-title">⚔️ XClash 1v1 Challenge</h1>
+                    <h1 className="contests-title">⚔️ 1v1 Coding Challenge</h1>
                     <p className="contests-subtitle">Battle your friends in real-time coding competitions</p>
                 </div>
 
@@ -129,14 +130,14 @@ export default function XClashGame() {
 
     if (mode === 'create') {
         return (
-            <div className="contest-form-container flex-1">
+            <div className="contest-form-container">
                 <button className="back-btn" onClick={() => setMode('home')}>← Back</button>
-
+                
                 <div className="contest-form">
                     <h2>Create New Challenge Room</h2>
                     <p>A room code will be generated for you. Share it with your friend.</p>
 
-                    <button
+                    <button 
                         className="submit-btn create-btn"
                         onClick={handleCreateRoom}
                         disabled={loading}
@@ -161,9 +162,9 @@ export default function XClashGame() {
 
     if (mode === 'join') {
         return (
-            <div className="contest-form-container flex-1">
+            <div className="contest-form-container">
                 <button className="back-btn" onClick={() => setMode('home')}>← Back</button>
-
+                
                 <div className="contest-form">
                     <h2>Join Challenge Room</h2>
                     <p>Enter the room code your friend shared with you</p>
@@ -176,7 +177,7 @@ export default function XClashGame() {
                         className="room-code-input"
                     />
 
-                    <button
+                    <button 
                         className="submit-btn join-btn"
                         onClick={handleJoinRoom}
                         disabled={loading}
@@ -197,4 +198,6 @@ export default function XClashGame() {
             </div>
         );
     }
-}
+};
+
+export default ContestLanding;

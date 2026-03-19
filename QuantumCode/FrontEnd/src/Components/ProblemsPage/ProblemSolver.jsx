@@ -68,7 +68,7 @@ export default function ProblemSolver() {
     setHasRun(false)
     
     try {
-      const response = await fetch('http://localhost:3000/api/problems/run-code', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/problems/run-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export default function ProblemSolver() {
     setHasRun(false)
     
     try {
-      const response = await fetch('http://localhost:3000/api/problems/run-code', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/problems/run-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,20 +4,11 @@ import { AuthContext } from '../../context/AuthContext'
 import './Header.css'
 import signInLogo from '../../Imgs/signInLogo.png'
 
-const TUTORIAL_ITEMS = [
-  'Python', 'Java', 'DSA', 'ML & Data Science', 'Interview Corner',
-  'Programming Languages', 'Web Development', 'GATE', 'CS Subjects', 'DevOps',
-  'School Learning', 'Software and Tools'
-]
 
-const PRACTICE_ITEMS = [
-  'Practice Coding Problems', 'Mock Tests', 'Contests', 'Interview Problems'
-]
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [tutorialOpen, setTutorialOpen] = useState(false)
-  const [practiceOpen, setPracticeOpen] = useState(false)
+
   const [profileOpen, setProfileOpen] = useState(false)
   const navigate = useNavigate()
   const { user, logout } = useContext(AuthContext)
@@ -37,24 +28,7 @@ export default function Navbar() {
     setMenuOpen(false)
   }
 
-  const getRoutePath = (item) => {
-    // Map specific tutorial items to their routes
-    const routeMap = {
-      'Python': 'python',
-      'Java': 'java',
-      'DSA': 'dsa',
-      'ML & Data Science': 'ml-data-science',
-      'Interview Corner': 'interview-corner',
-      'Programming Languages': 'programming-languages',
-      'Web Development': 'web-development',
-      'GATE': 'gate',
-      'CS Subjects': 'cs-subjects',
-      'DevOps': 'devops',
-      'School Learning': 'school-learning',
-      'Software and Tools': 'software-tools'
-    }
-    return `/tutorials/${routeMap[item] || item.toLowerCase().replace(/\s+/g, '-')}`
-  }
+
 
   return (
     <nav className="sticky top-0 z-50 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center justify-between p-3 sm:p-4 my-2 sm:my-5 bg-black rounded-0 sm:mx-10 sm:rounded-4xl hover:shadow-[0_15px_40px_rgba(0,0,0,0.4)] transition-shadow duration-300">
@@ -80,17 +54,13 @@ export default function Navbar() {
       <div className="hidden md:flex gap-6 sm:gap-9 items-center">
         <button onClick={() => navigate('/')} className="nav-link">Home</button>
         
-        <NavDropdown 
-          label="Tutorials" 
-          items={TUTORIAL_ITEMS} 
-          onItemClick={(item) => handleNavigate(getRoutePath(item))}
-          hasHeader={true}
-          onHeaderClick={() => handleNavigate('/tutorials')}
-        />
+
         
-        <NavDropdown label="Practice" items={PRACTICE_ITEMS} onItemClick={(item) => handleNavigate(`/practice/${item.toLowerCase().replace(/\s+/g, '-')}`)} />
+        <button onClick={() => handleNavigate('/tests')} className="nav-link">📝 Tests</button>
         
         <button onClick={() => handleNavigate('/problems')} className="nav-link">Problems</button>
+
+        <button onClick={() => handleNavigate('/contest')} className="nav-link">🎮 Contest</button>
 
         {/* User Profile or Sign In */}
         {user ? (
@@ -133,11 +103,13 @@ export default function Navbar() {
         <div className="absolute top-full left-0 right-0 bg-black md:hidden flex flex-col gap-2 p-2 sm:gap-3 sm:p-4 border-t border-gray-700 mobile-menu">
           <button onClick={() => handleNavigate('/')} className="mobile-nav-btn">Home</button>
           
-          <MobileDropdown label="Tutorials" open={tutorialOpen} setOpen={setTutorialOpen} items={TUTORIAL_ITEMS} onItemClick={(item) => handleNavigate(getRoutePath(item))} />
+
           
-          <MobileDropdown label="Practice" open={practiceOpen} setOpen={setPracticeOpen} items={PRACTICE_ITEMS} onItemClick={(item) => handleNavigate(`/practice/${item.toLowerCase().replace(/\s+/g, '-')}`)} />
+          <button onClick={() => handleNavigate('/tests')} className="mobile-nav-btn">📝 Tests</button>
           
           <button onClick={() => handleNavigate('/problems')} className="mobile-nav-btn">Problems</button>
+
+          <button onClick={() => handleNavigate('/contest')} className="mobile-nav-btn">🎮 Contest</button>
 
           {/* Mobile User Menu */}
           {user ? (
@@ -170,36 +142,4 @@ export default function Navbar() {
   )
 }
 
-function NavDropdown({ label, items, onItemClick, hasHeader, onHeaderClick }) {
-  return (
-    <div className="nav-item">
-      <button className="nav-link" onClick={onHeaderClick}>{label}</button>
-      <div className="dropdown" role="menu">
-        {items.map((item) => (
-          <button key={item} onClick={() => onItemClick(item)} className="dropdown-link">
-            {item}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
 
-function MobileDropdown({ label, open, setOpen, items, onItemClick }) {
-  return (
-    <div>
-      <button onClick={() => setOpen(!open)} className="mobile-nav-btn w-full text-left">
-        {label} {open ? '▴' : '▾'}
-      </button>
-      {open && (
-        <div className="mobile-submenu pl-4">
-          {items.map((item) => (
-            <button key={item} onClick={() => { onItemClick(item); setOpen(false) }} className="mobile-nav-btn text-white text-sm py-2">
-              {item}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}

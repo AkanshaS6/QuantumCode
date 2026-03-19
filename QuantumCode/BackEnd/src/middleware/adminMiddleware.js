@@ -29,10 +29,13 @@ const adminMiddleware = async (req, res, next)=>{
         }
 
         // Check if token is in Redis blocklist
-       const IsBlocked = await redisClient.exists(`token:${token}`);
-
-       if(IsBlocked){
-        return res.status(401).send("Error: Invalid Token");
+       try {
+         const IsBlocked = await redisClient.exists(`token:${token}`);
+         if(IsBlocked){
+           return res.status(401).send("Error: Invalid Token");
+         }
+       } catch (redisErr) {
+         console.warn('⚠️  Redis unavailable, skipping token blocklist check');
        }
 
        req.result = result;

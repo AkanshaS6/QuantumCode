@@ -135,19 +135,19 @@ export default function AdminDashboard() {
               <button className="feature-btn" onClick={() => navigate('/problem/create')}>Manage Problems</button>
             </div>
 
-            {/* Contest Management */}
+            {/* Tests Management */}
             <div className="feature-card">
               <div className="feature-header">
-                <h3>⚔️ Contest Management</h3>
+                <h3>📝 Tests Management</h3>
               </div>
               <ul className="feature-list">
-                <li>Create contests</li>
-                <li>Schedule contests</li>
-                <li>View leaderboards</li>
-                <li>Manage participants</li>
-                <li>Publish results</li>
+                <li>Create scheduled tests</li>
+                <li>Set time limits</li>
+                <li>Pick test problems</li>
+                <li>View test submissions</li>
+                <li>Delete past tests</li>
               </ul>
-              <button className="feature-btn">Manage Contests</button>
+              <button className="feature-btn" onClick={() => navigate('/admin/tests')}>Manage Tests</button>
             </div>
 
             {/* Analytics */}
